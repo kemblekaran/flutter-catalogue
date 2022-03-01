@@ -1,4 +1,5 @@
 import 'package:catalog_app/pages/loginpage.dart';
+import 'package:catalog_app/routes/routes.dart';
 
 import '/pages/homepage.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +21,9 @@ class CatalogApp extends StatelessWidget {
           fontFamily: GoogleFonts.roboto().fontFamily),
       darkTheme: ThemeData(primarySwatch: Colors.purple),
       routes: {
-        "/": (context) => LoginPage(),
-        "/login": (context) => LoginPage(),
-        "/home": ((context) => HomePage())
+        "/": (context) => const LoginPage(),
+        CatalogueAppRoutes.loginRoute: (context) => const LoginPage(),
+        CatalogueAppRoutes.homeRoute: ((context) => const HomePage())
       },
     );
   }

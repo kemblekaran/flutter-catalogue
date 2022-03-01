@@ -1,3 +1,4 @@
+import 'package:catalog_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -5,7 +6,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appName = 'Catalog App';
     return Material(
       color: Colors.white,
       child: Column(
@@ -14,35 +14,39 @@ class LoginPage extends StatelessWidget {
             "assets/images/login-image.png",
             fit: BoxFit.cover,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20.0,
           ),
-          Text(
+          const Text(
             "Welcome",
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: "Enter you username", labelText: "User Name"),
                   ),
                   TextFormField(
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: "Enter your password", labelText: "Password"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20.0,
                   ),
                   ElevatedButton(
-                      onPressed: () => {},
-                      child: Text("Login"),
-                      style: TextButton.styleFrom(enableFeedback: true))
+                      onPressed: () => {
+                            Navigator.pushNamed(
+                                context, CatalogueAppRoutes.homeRoute)
+                          },
+                      child: const Text("Login"),
+                      style: TextButton.styleFrom(
+                          enableFeedback: true, minimumSize: Size(100, 40)))
                 ],
               ),
             ),
