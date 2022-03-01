@@ -1,8 +1,16 @@
 import 'package:catalog_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  var _userName = "";
+  bool _pressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +25,8 @@ class LoginPage extends StatelessWidget {
           const SizedBox(
             height: 20.0,
           ),
-          const Text(
-            "Welcome",
+          Text(
+            "Welcome $_userName",
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20.0),
@@ -30,6 +38,10 @@ class LoginPage extends StatelessWidget {
                   TextFormField(
                     decoration: const InputDecoration(
                         hintText: "Enter you username", labelText: "User Name"),
+                    onChanged: (value) {
+                      _userName = value;
+                      setState(() {});
+                    },
                   ),
                   TextFormField(
                     obscureText: true,
@@ -37,16 +49,41 @@ class LoginPage extends StatelessWidget {
                         hintText: "Enter your password", labelText: "Password"),
                   ),
                   const SizedBox(
-                    height: 20.0,
+                    height: 40.0,
                   ),
-                  ElevatedButton(
-                      onPressed: () => {
-                            Navigator.pushNamed(
-                                context, CatalogueAppRoutes.homeRoute)
-                          },
-                      child: const Text("Login"),
-                      style: TextButton.styleFrom(
-                          enableFeedback: true, minimumSize: Size(100, 40)))
+                  InkWell(
+                    onTap: () async {
+                      setState(() {
+                        _pressed = true;
+                      });
+
+                      await Future.delayed(const Duration(seconds: 1));
+                      Navigator.pushNamed(
+                          context, CatalogueAppRoutes.homeRoute);
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(seconds: 1),
+                      width: _pressed ? 75 : 150,
+                      height: 50,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: Colors.deepPurple,
+                          shape:
+                              _pressed ? BoxShape.circle : BoxShape.rectangle),
+                      child: _pressed
+                          ? const Icon(
+                              Icons.done,
+                              color: Colors.white,
+                            )
+                          : const Text(
+                              "Login",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                    ),
+                  )
                 ],
               ),
             ),
