@@ -15,11 +15,13 @@ class CatalogApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       theme: ThemeData(
           primarySwatch: Colors.red,
           fontFamily: GoogleFonts.roboto().fontFamily),
       darkTheme: ThemeData(primarySwatch: Colors.purple),
+      initialRoute: CatalogueAppRoutes.homeRoute,
       routes: {
         "/": (context) => const LoginPage(),
         CatalogueAppRoutes.loginRoute: (context) => const LoginPage(),
